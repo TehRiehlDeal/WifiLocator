@@ -10,7 +10,7 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public class NetworkDiscovery {
+public class MacNetworkDiscovery {
 
     static List<WifiNetwork> wifiNetworks = new ArrayList<WifiNetwork>();
     static List<String> networkName = new ArrayList<String>();
