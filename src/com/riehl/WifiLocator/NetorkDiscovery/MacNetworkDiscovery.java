@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
@@ -17,9 +18,10 @@ public class MacNetworkDiscovery {
     static final String reg = "((.){2}:){5}((\\w\\d)|(\\d\\w)|(\\d\\d))";
     static String s;
 
-    public static void readNetworks() {
+    public static String readNetworks(String name){
         try {
-            Process p = Runtime.getRuntime().exec("airport -s");
+            Process p = Runtime.getRuntime().exec("airport -s " + name);
+
 
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
@@ -47,12 +49,24 @@ public class MacNetworkDiscovery {
             networkName.clear();
             wifiNetworks.clear();
             p.destroy();
+            if (name.isEmpty()){
+                Scanner scan = new Scanner(System.in);
+                System.out.println("\nWhich network do you want to track?");
+                String network = scan.nextLine();
+                return network;
+            }
 
-        } catch (
-                IOException e) {
+
+        } catch (IOException e) {
             System.out.println("exception happened - here's what I know: ");
             e.printStackTrace();
             System.exit(-1);
         }
+
+        return name;
+    }
+
+    public static void pingNetwork(){
+
     }
 }
